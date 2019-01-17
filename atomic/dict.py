@@ -1,5 +1,5 @@
 import threading
-from typing import TypeVar, Dict, Optional
+from typing import TypeVar, Dict, Optional, Iterator, Tuple
 
 from atomic.atomic import Atomic
 
@@ -20,6 +20,15 @@ class ThreadSafeDict(Atomic):
 
     def __contains__(self, item):
         return self.contains(item)
+
+    def items(self) -> Iterator[Tuple[K, V]]:
+        if not self._in_transaction or threading.current_thread() != self._transaction_thread:
+            with self._lock:
+                for k, v in self._values.items():
+                    yield k, v
+        else:
+            for k, v in self._values.items():
+                yield k, v
 
     def contains(self, key: K) -> bool:
         return self.get(key) is not None

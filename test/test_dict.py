@@ -35,6 +35,28 @@ class TestDict(TestCase):
         assert y == 2, "Second newest item not in dictionary"
         assert x == 1, "First newest item not in dictionary"
 
+    def test_items(self):
+        self._data.set(key = "dog", value = 1)
+        self._data.set(key = "cat", value = 2)
+        self._data.set(key = "mouse", value = 3)
+
+        did_get_dog = False
+        did_get_cat = False
+        did_get_mouse = False
+
+        for k, v in self._data.items():
+            if k == "dog":
+                did_get_dog = v == 1
+            elif k == "cat":
+                did_get_cat = v == 2
+            elif k == "mouse":
+                did_get_mouse = v == 3
+
+        assert did_get_dog, "Failed to get dog"
+        assert did_get_cat, "Failed to get cat"
+        assert did_get_mouse, "Failed to get mouse"
+
+
     def test_contains(self):
         self._data.set(key = "dog", value = 1)
         self._data.set(key = "cat", value = 2)
