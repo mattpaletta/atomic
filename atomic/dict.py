@@ -27,9 +27,9 @@ class ThreadSafeDict(Atomic):
     def get(self, key: K) -> Optional[V]:
         if not self._in_transaction or threading.current_thread() != self._transaction_thread:
             with self._lock:
-                return self._values.get(key, default = None)
+                return self._values.get(key, None)
         else:
-            return self._values.get(key, default = None)
+            return self._values.get(key, None)
 
     def set(self, key: K, value: V) -> None:
         if not self._in_transaction or threading.current_thread() != self._transaction_thread:

@@ -31,9 +31,9 @@ class TestDict(TestCase):
         x = self._data.get("dog")
         y = self._data.get("cat")
         z = self._data.get("mouse")
-        assert z == 3, "Newest item not in dictionary"
+        assert z == 3, "Third item not in dictionary"
         assert y == 2, "Second newest item not in dictionary"
-        assert x is None, "Oldest item not replaced"
+        assert x == 1, "First newest item not in dictionary"
 
     def test_contains(self):
         self._data.set(key = "dog", value = 1)
@@ -43,9 +43,9 @@ class TestDict(TestCase):
         x = self._data.contains(key = "dog")
         y = self._data.contains(key = "cat")
         z = self._data.contains(key = "mouse")
-        assert z, "Newest item not in dictionary"
-        assert y, "Second newest item not in dictionary"
-        assert not x, "Oldest item not replaced"
+        assert z, "Third item not in dictionary"
+        assert y, "Second item not in dictionary"
+        assert x, "First item not in dictionary"
 
     def test_transaction(self):
         def helper(data: ThreadSafeDict):

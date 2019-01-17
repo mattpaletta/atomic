@@ -41,7 +41,7 @@ class AtomicList(Atomic):
     def __setitem__(self, ii, val):
         if not self._in_transaction or threading.current_thread() != self._transaction_thread:
             with self._lock:
-                if not self._transation:
+                if not self._in_transaction:
                     self._value[ii] = val
         else:
             self._value[ii] = val
