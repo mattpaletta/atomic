@@ -1,2 +1,2 @@
-import atomic.Integer
-import atomic.List
+import atomic.integer
+import atomic.list

@@ -1,4 +1,4 @@
-from Atomic import Atomic
+from atomic.atomic import Atomic
 
 
 class Integer(Atomic):
